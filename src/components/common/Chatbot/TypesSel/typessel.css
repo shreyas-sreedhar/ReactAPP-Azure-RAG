@@ -1,0 +1,117 @@
+ 
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white; /* Adjust the background color as needed */
+    color: #333;
+    overflow: auto;
+    
+  }
+/*   
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: sans-serif;
+    background-color:#E7E9EA;
+  }
+   */
+ 
+  
+  .next-button {
+    background-color: #6921F0;
+    color: #fff;
+    margin-top: 60px;
+    width: 120px;
+    height: 40px;
+    border-radius: 0px;
+    
+    
+  }
+  .next-button:hover{
+    background-color: #230A50;
+  }
+ .maincon{
+  display: grid;
+  overflow: auto;
+ }
+  /* Styles for the catalog creation container */
+  .catalog-creation {
+    max-width: 80vw;
+    /* Adjust the width as needed */
+    margin: 40px auto;
+    padding: 20px;
+    flex-direction: row;
+    background-color: #fff; /* Card background */
+    border-radius: 8px; /* Card corner rounding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Card shadow */
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Title and step indicator styles */
+  .catalog-creation h2 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .catalog-creation p {
+    color: #666;
+    margin: 5px 0 20px;
+  }
+  .progress{
+    font-style: bold;
+    font-size: 12px;
+    padding: 20px;
+  }
+  .file-sources {
+    display: flex; /* Use flexbox instead of grid */
+    justify-content: space-between; /* Distribute space between cards */
+    align-items: stretch; /* Stretch cards to fill the container */
+  }
+  
+  .file-source-card {
+    flex: 1; /* Flex property to allow cards to grow and shrink */
+    margin: 0 10px; /* Add margin between cards */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: left; /* Align text to the left */
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    display: flex; /* Use flexbox for the card's content */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Distribute space between card elements */
+  }
+  
+  .file-source-card:first-child {
+    margin-left: 0; /* Remove left margin for the first card */
+  }
+  
+  .file-source-card:last-child {
+    margin-right: 0; /* Remove right margin for the last card */
+  }
+  
+  /* Selected state for the card */
+  .file-source-card.selected {
+    border-color: #007bff; /* Highlight color for selected cards */
+    background-color: #e7f3ff; /* Light background color for selected cards */
+  }
+  
+  /* Styles for the title and descriptions */
+  .file-source-card h3 {
+    font-size: 14px; /* Adjust font size as needed */
+    margin: 0 0 10px 0; /* Space between title and description */
+  }
+  
+  .file-source-card p {
+    font-size: 12px; /* Adjust font size as needed */
+    color: #666;
+    margin: 0;
+  }

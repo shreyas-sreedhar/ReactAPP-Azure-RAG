@@ -1,0 +1,57 @@
+#home{
+    background:var(--bg-color);
+    color:var(--font-color);
+    width:100%;
+    text-align: left;
+    height:100%;
+}
+#home h3{
+    margin-bottom:20px;
+}
+#home .contentWrapper{
+    display:flex;
+    background:rgb(24,23,27);
+    height:100%;
+}
+#home .contentWrapper .therapeuticAreas{
+    background:var(--bg-color);
+    padding:20px;
+    padding-top:150px;
+}
+#home .contentWrapper .therapeuticAreas p{
+    width:fit-content;
+    margin-bottom:40px;
+    cursor:pointer;
+}
+#home .contentWrapper .therapeuticAreas .activeTA{
+    color:var(--active-ta);
+    border-bottom: 2px solid;
+}
+#home .contentWrapper .brands{
+    background:rgb(228,228,228);
+    padding:40px;
+    padding-top:150px;
+    width:100%;
+}
+#brandList{
+    list-style: none;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    row-gap: 20px;
+    column-gap: 20px;
+}
+.brandItem{
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgb(200,200,200);
+    box-shadow:0 0 5px rgb(200,200,200);
+    padding:10px;
+}
+.brandItem:hover, .brandItemActive{
+    box-shadow:0 0 15px rgb(200,200,200)
+}
+.brandItem img{
+    width:100%;
+    height:100%;
+}

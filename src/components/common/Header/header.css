@@ -1,0 +1,102 @@
+#header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 20px;
+    color:var(--font-color);
+}
+#header .brandFilter{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+}
+#header .brandFilter-hidden{
+    visibility: hidden;
+}
+#header .brandFilter .brandSelector{
+    display:flex;
+    border-radius:20px;
+    background:var(--dark-shade1);
+    color:var(--light-shade1);
+    margin-left:20px;
+    cursor:pointer;
+}
+#header .brandFilter .brandSelector .brandName{
+    padding:5px;
+    border-radius:20px;
+}
+#header .brandFilter .brandSelector .activeBrand{
+    background:var(--dark-shade2);
+    color:var(--white);
+}
+#header .title{
+    font-size: 30px;
+    color:var(--font-color);
+}
+#header .userSection{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#header .userSection .details{
+    text-align:right;
+    font-size:small;
+    font-weight:bold;
+}
+#header .userSection .iconWrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:10px;
+}
+#header .userSection .iconWrapper img{
+    cursor:pointer;
+    border-radius:100%;
+}
+#userIconWrapper{
+    position:relative;
+}
+#userOptions{
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    top:40px;
+    width: 132px;
+    background: white;
+    box-shadow: 0 0 10px rgb(200,200,200);
+    border-radius: 5px;
+    cursor:pointer;
+    overflow:hidden;
+}
+#userOptions ul{
+    list-style: none;
+}
+#userOptions ul li{
+    color:black;
+    padding: 10px;
+    font-weight:bold;
+}
+#userOptions ul li:hover{
+    background:rgb(245,245,245);
+}
+#themeSelector{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background:var(--dark-shade1);
+    width:60px;
+    border-radius:20px;
+}
+#themeSelector .themeOption{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding:2px;
+    border-radius:100%;
+    cursor:pointer;
+    border:2px solid transparent;
+}
+#themeSelector .themeOptionSelected{
+    background:rgb(150,150,150);
+    border:2px solid;
+}

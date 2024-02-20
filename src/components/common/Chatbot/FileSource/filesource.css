@@ -1,0 +1,87 @@
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f5f7; /* Adjust the background color as needed */
+  color: #333;
+}
+
+
+.catalog-creation {
+  max-width: 80vw;
+  margin: 40px auto;
+  padding: 20px;
+  flex-direction: row;
+  background-color: #fff; /* Card background */
+  border-radius: 8px; /* Card corner rounding */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Card shadow */
+  text-align: center;
+  padding: 20px;
+}
+.tabledeets{
+  max-width: 80vh;
+ align-items: center;
+ display: flex;
+ flex-wrap: wrap;
+
+
+}
+ 
+  
+  /* Table Styles */
+  table {
+    width: 800px;
+    margin-left: 100px;
+    border-collapse: collapse;
+    margin-bottom: 30px; /* Increased space between tables */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    font-size: 16px; /* Adjusted for better readability */
+  }
+  .tabledeets { /* Make sure your table is wrapped in a div with this class */
+    width: 100%; /* Adjust to your preference */
+    display: flex;
+    justify-content: center; /* This centers the child elements */
+    align-items: center; /* This vertically centers the child elements if the container is taller than the content */
+    flex-direction: column; /* Stack children vertically */
+  }
+  
+  th, td {
+    border: 1px solid #e1e1e1; /* Lighter grey for a softer look */
+    text-align: left;
+    padding: 12px 15px; /* More generous padding for content */
+    color: #333; /* Darker text for contrast */
+    width: 200px;
+  }
+  
+  th {
+    background-color: #fafafa; /* Very light grey for headers */
+    color: #333; /* Ensures text color is readable */
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f5f5f5; /* Slightly different shade for zebra striping */
+  }
+  
+  /* Link Styles */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Adding spacing around the table for isolation */
+  .container {
+    padding: 20px;
+  }
+  
+  /* Improving the visual hierarchy and spacing */
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #333;
+  }

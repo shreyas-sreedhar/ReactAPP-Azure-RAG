@@ -1,0 +1,19 @@
+{
+    "users":[
+        {
+            "userName":"johnwick",
+            "password":"test",
+            "userType":"Brand Manager"
+        },
+        {
+            "userName":"smithkevin",
+            "password":"test",
+            "userType":"VP Sales"
+        },
+        {
+            "userName":"joewatson",
+            "password":"test",
+            "userType":"Field Rep"
+        }
+    ]
+}

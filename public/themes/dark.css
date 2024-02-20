@@ -1,0 +1,13 @@
+:root {
+    --bg-color: #000000;
+    --sidebar-bg: #18171b;
+    --sidebar-selected-bg:#302f32;
+    --sidebar-selected-border:#c9dff5;
+    --white: #ffffff;
+    --black: #000000;
+    --font-color: white;
+    --dark-shade1:#222222;
+    --light-shade1:#A9A9A9;
+    --dark-shade2:rgb(84,84,84);
+    --active-ta:rgb(241,197,107);
+  }
