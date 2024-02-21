@@ -60,7 +60,40 @@
   }
 
 
+  .next-button4 {
+    background-color: #6921F0;
+    color: #ffffff;
+    margin-top: 10px;
+    /* width: 120px; */
+    /* height: 40px; */
+    border-radius: 1px;
+    border-color: #230A50;
 
+    
+    
+  }
+  .next-button4:hover{
+    background-color: #6921F0;
+  }
+
+
+  .next-button5 {
+    
+    color: #000000;
+    margin-top: 10px;
+    /* width: 120px; */
+    /* height: 40px; */
+    border-radius: 1px;
+    font-size: 12px;
+    border-color: #230A50;
+
+    
+    
+  }
+  .next-button5:hover{
+    background-color: #6921F0;
+    color:white
+  }
 
   .next-button {
     background-color: #6921F0;

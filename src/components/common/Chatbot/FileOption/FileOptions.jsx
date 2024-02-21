@@ -2,70 +2,65 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../chatbot.css';
 
+
 function FileOptions({ selectedDomains, loggedUser }) {
     const [domainData, setDomainData] = useState([]);
-    const [s3Data, setS3Data] = useState(null);
-    const [showS3Data, setShowS3Data] = useState(false);
-    const [showTables, setShowTables] = useState(false);
     const [tables, setTables] = useState([]);
+    const [showTables, setShowTables] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // New state for loading indication
+    const [error, setError] = useState(''); // New state for error messages
 
     useEffect(() => {
         const constructS3Url = () => {
-            const bucketName = "shreyaswapi"; // Adjust if necessary
-            const region = "us-east-2"; // Your S3 bucket region
+            const bucketName = "shreyaswapi";
+            const region = "us-east-2";
             const fileKey = `selectedDomainsData/${loggedUser}.json`;
             return `https://shreyaswapi.s3.us-east-2.amazonaws.com/selectedDomainsData/Brand+Manager.json`;
         };
 
         const fetchDomainData = async () => {
-            const fileUrl = constructS3Url(loggedUser, selectedDomains); // Now passing arguments
-
+            setIsLoading(true); // Indicate loading state
             try {
+                const fileUrl = constructS3Url(loggedUser, selectedDomains);
                 const response = await axios.get(fileUrl);
-                setDomainData(Array.isArray(response.data) ? response.data : [response.data]); // Ensure domainData is always an array
+                setDomainData(Array.isArray(response.data) ? response.data : [response.data]);
             } catch (error) {
                 console.error('Error fetching selected domain data from S3:', error);
+                setError('Failed to fetch domain data'); // Set error message
+            } finally {
+                setIsLoading(false); // Reset loading state
             }
         };
 
-        if (selectedDomains && loggedUser) { // Ensure there are selected domains and a logged user before fetching
+        if (selectedDomains && loggedUser) {
             fetchDomainData();
         }
-    }, [selectedDomains, loggedUser]); // Depend on selectedDomains and loggedUser to refetch when they change
+    }, [selectedDomains, loggedUser]);
 
-
-    // const fetchDbDetails = async () => {
-    //     try {
-    //         const response = await axios.get('http://localhost:3000/api/database-details');
-    //         setDbDetails(response.data); // Assuming the backend sends data in the correct format
-    //         setShowDbDetails(true); // Show the details upon successful fetch
-    //     } catch (error) {
-    //         console.error('Error fetching database details:', error);
-    //         setShowDbDetails(false);
-    //     }
-    // };
     const fetchS3Data = async () => {
-        const s3Url = "https://shreyaswapi.s3.us-east-2.amazonaws.com/pdf/";
+        console.log(loggedUser)
+        if(loggedUser.userType === "Brand Manager" || loggedUser.userType === "VP Sales"){
+
+        const s3Url = "http://localhost:3001/database-details";
+
         try {
-            const response = await axios.get(s3Url);
-            console.log(response.data);
-            // setS3Data(response.data);
-            setTables(response.data.tables); // Assuming the response structure matches your YAML converted to JSON
+            const response = await axios.post(s3Url);
+            setTables(response.data); // Assuming this is the correct path
             setShowTables(true);
-     // Set the fetched data to state
         } catch (error) {
             console.error('Error fetching data from S3:', error);
         }
+    }
+        else {
+            alert("You dont have credentials to display DB data");
+        }
     };
-    useEffect(() => {
-        fetchS3Data();
-    }, []);
-
-    // Replace 'yourS3UrlHere' with the actual S3 URL you want to fetch from
-    
 
     return (
         <div>
+            {isLoading && <p>Loading...</p>} {/* Loading indication */}
+            {error && <p>{error}</p>} {/* Error message */}
+
             <h3>Domain Table</h3>
             <table>
                 <thead>
@@ -73,6 +68,7 @@ function FileOptions({ selectedDomains, loggedUser }) {
                         <th>Domain</th>
                         <th>File Name</th>
                         <th>File Path</th>
+                        <th>Choose File</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,47 +77,46 @@ function FileOptions({ selectedDomains, loggedUser }) {
                             <td>{item.domain}</td>
                             <td>{item.file_name}</td>
                             <td><a href={`https://shreyaswapi.s3.us-east-2.amazonaws.com/${item.file_path}`} target="_blank" rel="noreferrer">Download</a></td>
-                            
-
+                            <td><button className='next-button4'>Add to bucket</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <button onClick={fetchS3Data}>Fetch Dabatase Details</button>
+            {/* <div>
+                
+                {showTables && tables.map((table, index) => (
+                    <div key={index}>
+                        <h2></h2>
+                        <p></p>
+                        <h5>Columns:</h5>
+                   
+                    </div>
 
-            <div>
-        
-
-            <div>
-            <button onClick={fetchS3Data}>Fetch Data</button>
-            
-            {s3Data && s3Data.tables && s3Data.tables.map((table, index) => (
-                <div key={index}>
-                    <h2>{table.name}</h2>
-                    <p>{table.description}</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Column Name</th>
-                                <th>Description</th>
-                                <th>Data Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {table.columns.map((column, colIndex) => (
-                                <tr key={colIndex}>
-                                    <td>{column.name}</td>
-                                    <td>{column.description}</td>
-                                    <td>{column.data_type}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            ))}
-        </div>
-        </div>
-
-        </div>
+                ))} */}
+                <h3>Database Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Database Name</th>
+                        <th>Database Description</th>
+                        <th> Columns</th>
+                        <th>Choose File</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {showTables && tables.map((table, index) => (
+                        <tr key={index}>
+                            <td>{table.name}</td>
+                            <td>{table.description}</td>
+                            <td> <button className='next-button5'>View Columns</button></td>
+                            <td><button className='next-button4'>Add to bucket</button></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            </div>  
+        // </div>
     );
 }
 

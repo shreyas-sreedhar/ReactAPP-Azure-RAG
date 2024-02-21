@@ -189,10 +189,10 @@ app.post('/chatbot', async (req, res) => {
 
 app.get('/existing-catalogs', async (req, res) => {
     try {
-      // Fetch JSON data from S3 bucket
+   
       const jsonData = await fetchJSONData('catalogs.json');
   
-      // Send JSON data as response
+     
       res.json(jsonData.catalogs);
       console.log("this is catalogs" +jsonData.catalogs)
     } catch (error) {
@@ -205,7 +205,7 @@ app.get('/existing-catalogs', async (req, res) => {
     try {
         if (!selectedDomains) {
             console.error('Selected domains are not defined.');
-            return; // Exit the function if selectedDomains is undefined
+            return; 
         }
 
         let selectedDomainData = [];
@@ -283,21 +283,20 @@ app.get('/existing-catalogs', async (req, res) => {
 
 app.post('/selected-domains', async (req, res) => {
     try {
-        // Extract selected domain names and user type from request body
+        
         const selectedDomains = req.body.selectedDomains;
         const theUser = req.body.uType;
 
-        // Fetch data tagged under selected domain names from S3 bucket
+        
         const selectedDomainsData = await fetchSelectedDomainsData(selectedDomains, theUser);
         
-        // Specify your S3 bucket name and key prefix
+       
         const bucketName = process.env.S3_BUCKET_NAME;
         const keyPrefix = 'selectedDomainsData';
 
-        // Upload the data to S3 and get the file URL
         const dataUrl = await uploadDataToS3(selectedDomainsData, bucketName, keyPrefix, theUser);
 
-        // Send the URL of the uploaded file as the response
+      
         res.json({ url: dataUrl });
 
     } catch (error) {
@@ -307,7 +306,6 @@ app.post('/selected-domains', async (req, res) => {
 });
 
 
-// Function to upload data to S3 and return the file URL
 async function uploadDataToS3(data, bucketName, keyPrefix, theUser) {
     // const timestamp = Date.now();
     const key = `${keyPrefix}/${theUser}.json`;
@@ -336,7 +334,7 @@ function loadDatabaseConfig() {
     }
   }
   
-  app.get('/api/database-details', (req, res) => {
+  app.post('/database-details', (req, res) => {
     const data = loadDatabaseConfig();
     console.log(data)
     res.json(data.tables || []);
