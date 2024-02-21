@@ -8,6 +8,12 @@
     overflow: auto;
     
   }
+
+
+  p{
+    margin: 10px;
+  }
+  
 /*   
 .welcome-screen {
     display: flex;
@@ -21,14 +27,50 @@
   }
    */
  
-  
+   .next-button2 {
+    background-color: #6921F0;
+    color: #fff;
+    margin-top: 10px;
+    width: 120px;
+    height: 40px;
+    border-radius: 1px;
+    border-color: #230A50;
+
+    
+    
+  }
+  .next-button2:hover{
+    background-color: #230A50;
+  }
+
+  .next-button3 {
+    background-color: #230A50;
+    color: #fff;
+    margin-top: 10px;
+    /* width: 120px; */
+    height: 40px;
+    border-radius: 1px;
+    border-color: #230A50;
+
+    
+    
+  }
+  .next-button3:hover{
+    background-color: #6921F0;
+  }
+
+
+
+
   .next-button {
     background-color: #6921F0;
     color: #fff;
     margin-top: 60px;
     width: 120px;
     height: 40px;
-    border-radius: 0px;
+    border-radius: 1px;
+    border-color: #230A50;
+
     
     
   }
@@ -77,7 +119,7 @@
   
   .file-source-card {
     flex: 1; /* Flex property to allow cards to grow and shrink */
-    margin: 0 10px; /* Add margin between cards */
+    margin: 10px; /* Add margin between cards */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -115,3 +157,18 @@
     color: #666;
     margin: 0;
   }
+
+  .catalog-creation{
+    margin: 0 10px;
+    padding: 20px;
+}
+
+.existing-catalogs{
+  margin: 10px;
+  padding: 20px;
+  
+}
+
+.catalog-item{
+  padding: 20px
+}

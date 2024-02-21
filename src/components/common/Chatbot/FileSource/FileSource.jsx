@@ -3,7 +3,7 @@ import axios from 'axios';
 import './filesource.css';
 import ChatUI from '../ChatUI/ChatUI';
 
-function FileSource({ selectedFileTypes, utypename }) {
+function FileSource({ selectedFileTypes, utypename, selectedCatalog}) {
   const [files, setFiles] = useState([]); // Now this will store the full file objects
   const [selectedFiles, setSelectedFiles] = useState(new Set()); // To keep track of selected files
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -69,7 +69,7 @@ function FileSource({ selectedFileTypes, utypename }) {
 
   return (
     <div className='catalog-creation'>
-      <h2>Welcome to your File Catalog.</h2>
+      <h2>Welcome to your File Sui Catalog.</h2>
       <p className='progress'>Step 2 of 3</p>
       <p>Select the specific file from your catalog to add it to your chatbot.</p>
       <div className='tabledeets'>

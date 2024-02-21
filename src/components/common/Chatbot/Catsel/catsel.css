@@ -115,3 +115,23 @@
     color: #666;
     margin: 0;
   }
+.catalog-creation{
+    margin: 0 10px;
+    padding: 20px;
+}
+
+.next-button {
+  background-color: #6921F0;
+  color: #fff;
+  margin-top: 60px;
+  width: 120px;
+  height: 40px;
+  border-radius: 1px;
+  border-color: #230A50;
+
+  
+  
+}
+.next-button:hover{
+  background-color: #230A50;
+}
