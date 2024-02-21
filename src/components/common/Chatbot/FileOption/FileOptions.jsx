@@ -45,7 +45,7 @@ function FileOptions({ selectedDomains, loggedUser }) {
     //     }
     // };
     const fetchS3Data = async () => {
-        const s3Url = "https://shreyaswapi.s3.us-east-2.amazonaws.com/dump/idk.yml";
+        const s3Url = "https://shreyaswapi.s3.us-east-2.amazonaws.com/pdf/";
         try {
             const response = await axios.get(s3Url);
             console.log(response.data);
@@ -92,9 +92,9 @@ function FileOptions({ selectedDomains, loggedUser }) {
         
 
             <div>
-            <div>
-            <button onClick={fetchS3Data}>Show Tables</button>
-            {showTables && tables.map((table, index) => (
+            <button onClick={fetchS3Data}>Fetch Data</button>
+            
+            {s3Data && s3Data.tables && s3Data.tables.map((table, index) => (
                 <div key={index}>
                     <h2>{table.name}</h2>
                     <p>{table.description}</p>
@@ -111,17 +111,13 @@ function FileOptions({ selectedDomains, loggedUser }) {
                                 <tr key={colIndex}>
                                     <td>{column.name}</td>
                                     <td>{column.description}</td>
-                                    {/* Highlight varchar data types in uppercase */}
-                                    <td style={{ textTransform: column.data_type === 'varchar' ? 'uppercase' : 'none' }}>
-                                        {column.data_type}
-                                    </td>
+                                    <td>{column.data_type}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             ))}
-        </div>
         </div>
         </div>
 
