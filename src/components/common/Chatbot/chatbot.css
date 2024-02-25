@@ -2,15 +2,30 @@
   body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
     background-color: white; /* Adjust the background color as needed */
     color: #333;
     overflow: auto;
     
+    
+  }
+  .main-header{
+    margin-top: 30px;
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
+  }
+  .div-3 {
+    color: #000;
+    margin-top: 30px;
+    width: 746px;
+    font-size: 16px;
+
   }
 
 
   p{
+    font-size: 12px;
     margin: 10px;
   }
   
@@ -84,7 +99,7 @@
     /* width: 120px; */
     /* height: 40px; */
     border-radius: 1px;
-    font-size: 12px;
+    /* font-size: 16px; */
     border-color: #230A50;
 
     
@@ -111,6 +126,8 @@
     background-color: #230A50;
   }
  .maincon{
+  align-items: center;
+  justify-content: center;
   display: grid;
   overflow: auto;
  }
@@ -204,4 +221,152 @@
 
 .catalog-item{
   padding: 20px
+}
+
+
+
+.div {
+  display: flex;
+  max-width: 247px;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+}
+.div-2 {
+  border-radius: 12px;
+  border: 1px solid #6921f0;
+  box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 35px 19px;
+}
+.div-3 {
+  font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
+}
+.div-4 {
+  margin-top: 18px;
+  font: 400 12px Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
+}
+.connected-button {
+  font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  margin-top: 24px;
+  justify-content: center;
+  align-items: center;
+  color: #5b5b5b;
+  white-space: nowrap;
+  padding: 15px 60px;
+}
+.connected-button:hover {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+      sans-serif;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #6921F0;
+    margin-top: 24px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    white-space: nowrap;
+    padding: 15px 60px;
+  }
+
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .layout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .layout-header {
+    text-align: center;
+  }
+  
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .catalog-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .catalog-card-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+ 
+    padding: 10px;
+   
+  }
+  
+  .card-title {
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 24px
+  }
+  
+  .card-description {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
+    margin-bottom: 16px;
+    color: #5e5e5e;
+    
+  }
+  .card-description p {
+    font-size: 8px;
+  }
+  .catalog-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .catalog-button-create {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #000000;
+    color: white;
+  }
+  
+  .connected {
+    background-color: #6921F0;
+    color: white;
+  }
+  
+  .catalog-button:not(.connected) {
+    background-color: #D9D9D9;
+    color: #333;
+  }
+.table-title{
+font-size: 20px;
+font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+    sans-serif;
 }

@@ -12,6 +12,8 @@ import Chatbot from './components/common/Chatbot/Chatbot';
 import BrandManagerRoute from './components/Authentication/BrandManagerRoute';
 import VPSalesRoute from './components/Authentication/VPSalesRoute';
 import FieldRepRoute from './components/Authentication/FieldRepRoute';
+import DataSource from './components/common/DataSourceLayer/DataSource';
+import DataSelction from './components/common/DataSelectionLayer/DataSelection';
 
 function App() {
 
@@ -61,7 +63,9 @@ function App() {
               <Route exact path='/qna' element={<Layout link={data.qna} />} />
             </Route>
             <Route exact path='/chatbot' element={<Chatbot loggedUser={loggedUser} />} />
-            
+            <Route exact path='/chatbot-2' element={<DataSource loggedUser={loggedUser} />} />
+            <Route exact path='/chatbot-3' element={<DataSelction loggedUser={loggedUser} />} />
+            {/* <Route exact path='/chatbot-4' element={<DataSource loggedUser={loggedUser} />} /> */}
             <Route path='*' element={<div className='dataPlaceholder'>VIEW COMING SOON!</div>} />
           </Route>
         </Routes>

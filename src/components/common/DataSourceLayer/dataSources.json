@@ -1,0 +1,19 @@
+[
+    {
+      "key": "aws",
+      "name": "AWS S3 Buckets",
+      "img": "./images/aws.svg",
+      "details": [
+        { "id": 1, "detail": "Bucket 1", "info": "Info 1" },
+        { "id": 2, "detail": "Bucket 2", "info": "Info 2" }
+      ]
+    },
+    {
+      "key": "azure",
+      "name": "Azure Blob",
+      "img": "./images/azure.svg",
+      "details": [
+        { "id": 1, "detail": "Storage Account 1", "info": "Info 1" }
+      ]
+    }
+  ]

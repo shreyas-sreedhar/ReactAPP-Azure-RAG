@@ -1,0 +1,170 @@
+{
+    "tables": [
+    {
+        "name": "POC_FCT_PLNTRK_WKLY_ARD",
+        "description": "This fact table stores weekly planning and tracking information, including customer ID, customer plan ID, distribution channel code and description, field force ID and name, gender, number of new prescriptions, number of refills, product family code and description, product code and description, number of refusals, specialty code and type, state, therapeutic class code and description, territory code, number of transactions, week end date, ZIP code, group code and description, market code, and market description.",
+        "columns": [
+            {
+                "name": "AGE_GRP",
+                "description": "Age group of the patient the prescription Rx is written.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "CUST_ID",
+                "description": "Customer Id.",
+                "data_type": "integer",
+                "foreign_key": {
+                    "table": "POC_DIM_HCP",
+                    "column": "CUST_ID"
+                }
+            },
+            {
+                "name": "CUST_PLAN_ID",
+                "description": "The plan of the Rx which the patient used for claim.",
+                "data_type": "integer"
+            },
+            {
+                "name": "DSTRBTN_CHNL_CD",
+                "description": "The distribution channel code.",
+                "data_type": "integer"
+            },
+            {
+                "name": "DSTRBTN_CHNL_DESC",
+                "description": "The distribution channel description (Retail, LTC or Mail order).",
+                "data_type": "varchar"
+            },
+            {
+                "name": "FF_ID",
+                "description": "Sales force Id.",
+                "data_type": "integer",
+                "foreign_key": {
+                    "table": "POC_DIM_SALESFORCE",
+                    "column": "FF_ID"
+                }
+            },
+            {
+                "name": "FF_NM",
+                "description": "Sales force name.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "GNDR",
+                "description": "Patient Gender.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "NBRX",
+                "description": "New to Brand Prescription count.",
+                "data_type": "integer"
+            },
+            {
+                "name": "NRX",
+                "description": "New prescription count.",
+                "data_type": "integer"
+            },
+            {
+                "name": "PFAM_CD",
+                "description": "Product family code.",
+                "data_type": "integer"
+            },
+            {
+                "name": "PFAM_DESC",
+                "description": "Product family desc.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "PROD_CD",
+                "description": "Product Code.",
+                "data_type": "integer",
+                "foreign_key": {
+                    "table": "POC_DIM_PRODUCT",
+                    "column": "PROD_CD"
+                }
+            },
+            {
+                "name": "PROD_DESC",
+                "description": "Product Description.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "RRX",
+                "description": "Refill prescription count.",
+                "data_type": "integer"
+            },
+            {
+                "name": "SPEC_CD",
+                "description": "Customer specialty code.",
+                "data_type": "integer"
+            },
+            {
+                "name": "SPEC_TYP",
+                "description": "Customer specialty description/type.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "STATE",
+                "description": "Prescriber state.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "TC_CD",
+                "description": "Product Teraupetic class.",
+                "data_type": "integer"
+            },
+            {
+                "name": "TC_DESC",
+                "description": "Product Teraupetic description.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "TERR_CD",
+                "description": "territory code.",
+                "data_type": "integer"
+            },
+            {
+                "name": "TRX",
+                "description": "Total prescription count.",
+                "data_type": "integer"
+            },
+            {
+                "name": "WK_END_DT",
+                "description": "week end date. This column should be used to calculate the rolling and cumulative for 3 6 and 12 months.",
+                "data_type": "date"
+            },
+            {
+                "name": "ZIP_CD",
+                "description": "The zip code of the prescriber.",
+                "data_type": "integer"
+            },
+            {
+                "name": "GRP_CD",
+                "description": "Group Code of the product. This is used for reporting aggregate.",
+                "data_type": "integer",
+                "foreign_key": {
+                    "table": "POC_DIM_PRODUCT",
+                    "column": "GRP_CD"
+                }
+            },
+            {
+                "name": "GRP_DESC",
+                "description": "Group description of the product. This is used for reporting aggregate.",
+                "data_type": "varchar"
+            },
+            {
+                "name": "MKT_CD",
+                "description": "Product Market code. Market share % is calculated using the total Trx of Market/ Product TRx.",
+                "data_type": "integer",
+                "foreign_key": {
+                    "table": "POC_DIM_PRODUCT",
+                    "column": "MKT_CD"
+                }
+            },
+            {
+                "name": "MKT_DESC",
+                "description": "Product Market description. Market share % is calculated using the total Trx of Market/ Product TRx.",
+                "data_type": "varchar"
+            }
+        ]
+    }
+]
+}

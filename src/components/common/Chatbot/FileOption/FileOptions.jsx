@@ -55,6 +55,9 @@ function FileOptions({ selectedDomains, loggedUser }) {
             alert("You dont have credentials to display DB data");
         }
     };
+    const viewcolm = async () => {
+
+    }
 
     return (
         <div>
@@ -109,7 +112,7 @@ function FileOptions({ selectedDomains, loggedUser }) {
                         <tr key={index}>
                             <td>{table.name}</td>
                             <td>{table.description}</td>
-                            <td> <button className='next-button5'>View Columns</button></td>
+                            <td> <button className='next-button5' onClick={viewcolm}>View Columns</button></td>
                             <td><button className='next-button4'>Add to bucket</button></td>
                         </tr>
                     ))}

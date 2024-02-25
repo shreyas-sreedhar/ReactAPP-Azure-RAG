@@ -1,0 +1,291 @@
+.dsmain {
+    font: 24px Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 20px;
+}
+
+.div-2 {
+    color: #000;
+    white-space: nowrap;
+
+}
+
+
+.div-3 {
+    color: #000;
+    margin-top: 30px;
+    width: 746px;
+    font: 400 12px Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+}
+
+
+
+.div-4 {
+    border: var(--none, 1px) solid #6921f0;
+    background-color: #f9f9f9;
+    align-self: stretch;
+    display: flex;
+    margin-top: 49px;
+    width: 100%;
+    flex-direction: column;
+    color: #5b5b5b;
+    padding: 16px 15px 50px;
+}
+
+
+
+.div-5 {
+    color: #000;
+    font: 20px Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+}
+
+
+
+.div-6 {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    display: flex;
+    margin-top: 23px;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    white-space: nowrap;
+    padding: 14px 26px;
+}
+
+.div-7 {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+
+
+.img {
+    aspect-ratio: 1;
+    object-fit: auto;
+    object-position: center;
+    width: 32px;
+}
+
+.div-8 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    flex-grow: 1;
+    margin: auto 0;
+}
+
+
+.div-9 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    align-self: start;
+    justify-content: center;
+    padding: 10px 31px;
+}
+
+
+.div-10 {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 26px;
+}
+
+.div-11 {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.div-12 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    margin: auto 0;
+}
+
+.div-13 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    align-self: start;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 10px 31px;
+}
+
+
+
+.div-14 {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 26px;
+}
+
+
+
+.div-15 {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.div-16 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    margin: auto 0;
+}
+
+.div-17 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    align-self: start;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 10px 31px;
+}
+
+
+
+
+.div-18 {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 20px 0 9px;
+    padding: 14px 26px;
+}
+
+
+
+.div-19 {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.div-20 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    margin: auto 0;
+}
+
+.div-21 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    align-self: start;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 10px 31px;
+}
+
+
+.div-22 {
+    display: flex;
+    margin-top: 79px;
+    width: 380px;
+    max-width: 100%;
+    gap: 20px;
+    white-space: nowrap;
+}
+
+
+
+.div-23 {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0%;
+    flex-direction: column;
+    justify-content: center;
+    color: #5b5b5b;
+}
+
+
+.div-24 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 60px;
+}
+
+.div-25 {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0%;
+    flex-direction: column;
+    justify-content: center;
+    color: #d9d9d9;
+}
+
+
+.div-26 {
+    font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    border-radius: 5px;
+    background-color: #6921f0;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 60px;
+}
+
+
+
+.catalog-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .connected {
+    background-color: #6921F0;
+    color: white;
+  }
+  
+  .catalog-button:not(.connected) {
+    background-color: #D9D9D9;
+    color: #333;
+  }

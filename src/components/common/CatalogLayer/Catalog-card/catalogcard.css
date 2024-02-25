@@ -1,0 +1,56 @@
+
+    .div {
+      display: flex;
+      max-width: 247px;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 14px;
+      color: #000;
+      font-weight: 700;
+    }
+    .div-2 {
+      border-radius: 12px;
+      border: 1px solid #6921f0;
+      box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      padding: 35px 19px;
+    }
+    .div-3 {
+      font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    }
+    .div-4 {
+      margin-top: 18px;
+      font: 400 12px Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+    }
+    .connected-button {
+      font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+        sans-serif;
+      border-radius: 6px;
+      border: 1px solid #d9d9d9;
+      background-color: #fff;
+      margin-top: 24px;
+      justify-content: center;
+      align-items: center;
+      color: #5b5b5b;
+      white-space: nowrap;
+      padding: 15px 60px;
+    }
+    .connected-button:hover {
+        font-family: Red Hat Display, -apple-system, Roboto, Helvetica,
+          sans-serif;
+        border-radius: 6px;
+        border: 1px solid #d9d9d9;
+        background-color: #6921F0;
+        margin-top: 24px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        white-space: nowrap;
+        padding: 15px 60px;
+      }
+  
