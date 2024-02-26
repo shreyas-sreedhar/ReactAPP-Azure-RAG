@@ -20,7 +20,7 @@ const DataSelection = ({ loggedUser }) => {
     const [selectedRows, setSelectedRows] = useState([]);
 
     useEffect(() => {
-        setRows(tablesData.tables);
+        setRows([...tablesData.tables, ...tablesData.aws, ...tablesData.oracle]);
         setSelectedBuckets(selectedBucketsData.selectedBuckets);
     }, []);
 
@@ -134,6 +134,8 @@ const DataSelection = ({ loggedUser }) => {
             });
         });
     };
+
+
     const handleCardinalityChange = (index, value) => {
         // Assuming selectedTableData.columns is the array of columns
         const updatedColumns = [...selectedTableData.columns];
@@ -181,7 +183,7 @@ const DataSelection = ({ loggedUser }) => {
                         <Paper key={bucketIndex}>
                             <Box p={3}>
                                 <div className='table-title-ds'>Data Source: {bucket.dataSourceKey}</div>
-                                <Typography variant="h6">Bucket Name: {bucket.bucketName}</Typography>
+                                <Typography variant="h6">Name: {bucket.bucketName}</Typography>
                                 <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
                                     <TextField label="Search" variant="outlined" size="small" />
                                     <FormControl size="small" style={{ minWidth: 120 }}>
@@ -231,9 +233,43 @@ const DataSelection = ({ loggedUser }) => {
                                                                 handleRowSelect={handleRowSelect}
                                                             />
                                                         </TableCell>
-                                                        
-                                                        <TableCell align='center'>{row.name}</TableCell>
-                                                        <TableCell align="center">{trimDescription(row.description, 10)}
+                                                        <TableCell align='center'>
+                                                            {bucket.bucketName === 'IQVIA' ? (
+                                                                tablesData.aws[0].name
+                                                            ) : bucket.bucketName === 'SpecialtyPharma' ? (
+                                                                tablesData.aws.length > 1 ? tablesData.aws[1].name : 'Default AWS Name'
+                                                            ) : bucket.bucketName === 'SalesTransaction' ? (
+                                                                tablesData.oracle[0]?.name
+                                                            ) : bucket.bucketName === 'SalesTransaction' ? (
+                                                                tablesData.oracle[1]?.name
+                                                            ) : (
+                                                                tablesData.tables[0]?.name || 'Default Name'
+                                                            )}
+                                                        </TableCell>
+
+                                                        <TableCell align="center">
+
+                                                            {bucket.bucketName === 'IQVIA' ? (
+                                                                tablesData.aws[0].description
+                                                            ) : bucket.bucketName === 'SpecialtyPharma' ? (
+                                                                tablesData.aws.length > 1 ? tablesData.aws[1].description : 'Default AWS Name'
+                                                            ) : bucket.bucketName === 'SalesTransaction' ? (
+                                                                tablesData.oracle[0]?.description
+                                                            ) : bucket.bucketName === 'SalesTransaction' ? (
+                                                                tablesData.oracle[1]?.description
+                                                            ) : (
+                                                                tablesData.tables[0]?.description || 'Default Name'
+                                                            )}
+
+
+
+
+
+
+
+
+
+
                                                             <IconButton size="small" onClick={() => toggleCollapse(row)}>
                                                                 {row.open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                                                             </IconButton>

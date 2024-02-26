@@ -166,5 +166,28 @@
             }
         ]
     }
+],
+    "oracle": [
+        {
+        "name": "Patient_Status_Hub",
+        "description": "Patient Status from Oracle DB.",
+        "columns": []},
+        {
+         "name": "Sales_Summary_Transactions",
+            "description": "Sales transactions for a brand. ",
+            "columns": []}
+    ],
+    "aws": [
+{
+    
+        "name": "Adverseevent.mp3",
+        "description": " ",
+        "columns": []},
+        {
+            "name": "BrandReport.pdf",
+            "description": " ",
+            "columns": []
+        }
+
 ]
 }
