@@ -1,1 +1,35 @@
-{"selectedBuckets":[{"dataSourceKey":"aws","domain":"Syndicated","bucketName":"IQVIA"}]}
+{
+    "selectedBuckets": [
+        {
+            "dataSourceKey": "snowflake",
+            "domain": "Databases",
+            "bucketName": "customer_master_db"
+        },
+        {
+            "dataSourceKey": "oracle",
+            "domain": "Databases",
+            "bucketName": "SampleShipment"
+        },
+        {
+            "dataSourceKey": "aws",
+            "domain": "Syndicated",
+            "bucketName": "IQVIA"
+        },
+        {
+            "dataSourceKey": "aws",
+            "domain": "Syndicated",
+            "bucketName": "Symphony"
+        },
+        {
+            "dataSourceKey": "aws",
+            "domain": "Syndicated",
+            "bucketName": "Axciom"
+        },
+        {
+            "dataSourceKey": "aws",
+            "domain": "Internal",
+            "bucketName": "SpecialtyPharma"
+        }
+       
+    ]
+}

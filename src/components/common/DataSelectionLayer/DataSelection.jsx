@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import "../Chatbot/chatbot.css"
 
+// const selectedBucketsData = JSON.parse(localStorage.getItem('selectedBuckets'));
 
 
 const DataSelection = ({ loggedUser }) => {
