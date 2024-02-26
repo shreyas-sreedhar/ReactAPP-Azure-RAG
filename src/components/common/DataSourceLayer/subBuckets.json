@@ -10,7 +10,7 @@
         "Databases": ["customer_master_db", "copay_patienthub","OpenClaims", "SalesTransaction"]
       },
       "oracle": {
-        "Databases": ["SampleShipment", "PatientExclusions"]
+        "Databases": ["SalesTransaction", "PatientExclusions"]
 
       },"webpages": {
         "Knowledge Management": ["yourcompany.sharepoint.com"],

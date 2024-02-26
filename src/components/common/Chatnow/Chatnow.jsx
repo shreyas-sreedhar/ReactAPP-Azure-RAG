@@ -26,7 +26,7 @@ const Chatnow = ({ loggedUser }) => {
             </div>
             <div className="layout-container">
                 <header className="layout-header">
-                    <h1 className='pagetitle'>Task Complete</h1>
+                    <h1 className='pagetitle'>Catalog Saved</h1>
                     <div className="div-3">
                         Click to go back home. 
                        <Link to="/home"> <button className='next-button'> Go Home </button> </Link>
