@@ -583,4 +583,5 @@ const initializeBackend = async () => {
 };
 
 
-initializeBackend();
+// initializeBackend();
+module.exports = app;
