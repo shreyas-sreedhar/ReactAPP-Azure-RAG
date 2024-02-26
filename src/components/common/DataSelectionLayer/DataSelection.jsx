@@ -230,6 +230,7 @@ const DataSelection = ({ loggedUser }) => {
                                                                 handleRowSelect={handleRowSelect}
                                                             />
                                                         </TableCell>
+                                                        
                                                         <TableCell align='center'>{row.name}</TableCell>
                                                         <TableCell align="center">{trimDescription(row.description, 10)}
                                                             <IconButton size="small" onClick={() => toggleCollapse(row)}>

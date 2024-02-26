@@ -1,4 +1,4 @@
-const { S3Client, ListObjectsV2Command, GetObjectCommand, PutObjectCommand, GetObjectTaggingCommand } = require("@aws-sdk/client-s3");
+const { S3Client, ListObjectsV2Command,ListObjectsCommand, GetObjectCommand, PutObjectCommand, GetObjectTaggingCommand } = require("@aws-sdk/client-s3");
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -42,6 +42,7 @@ app.use(bodyParser.json());
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+   
 });
 
 let jsonData = {
@@ -516,3 +517,70 @@ app.get('/api/fetchawsdata', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch AWS data' });
   }
 });
+
+const fetchSubfoldersFromAWS = async (bucketName, folderPath, depth) => {
+  try {
+      // Base case: If depth is 0, return an empty array
+      if (depth === 0) {
+          return [];
+      }
+
+      const params = {
+          Bucket: bucketName,
+          Prefix: folderPath,
+          Delimiter: '/'
+      };
+
+     // Fetch objects from AWS S3
+const data = await s3Client.send(new ListObjectsCommand(params));
+
+// Extract subfolder names
+const subfolders = data.CommonPrefixes ? data.CommonPrefixes.map(obj => obj.Prefix.replace(folderPath, '').replace('/', '')) : [];
+
+// Extract file names if Contents is defined
+const files = data.Contents ? data.Contents.filter(obj => !obj.Key.endsWith('/')).map(obj => obj.Key.replace(folderPath, '')) : [];
+
+      // Recursively fetch subfolders up to the specified depth
+      const subfolderPromises = subfolders.map(async (subfolder) => {
+          const subfolderPath = subfolder ? `${folderPath}${subfolder}/` : folderPath;
+          const subSubfolders = await fetchSubfoldersFromAWS(bucketName, subfolderPath, depth - 1);
+          return { [subfolder]: subSubfolders };
+      });
+
+      // Wait for all subfolder promises to resolve
+      const resolvedSubfolders = await Promise.all(subfolderPromises);
+
+      const objects = [...resolvedSubfolders, ...files];
+      return objects;
+  } catch (error) {
+      console.error('Error fetching subfolders from AWS:', error);
+      throw error;
+  }
+};
+
+// Function to initialize backend
+const initializeBackend = async () => {
+  try {
+      // Read environment variables
+      const bucketName = "shreyaswapi";
+      const folderPath = "LLM2/";
+      const depth = 3; // Specify the depth of traversal
+
+      // Fetch subfolders from AWS up to the specified depth
+      const subfolders = await fetchSubfoldersFromAWS(bucketName, folderPath, depth);
+
+      // Construct JSON object with fetched subfolders
+      const jsonObject = { [folderPath]: subfolders };
+      const existingData = require('../src/components/common/DataSelectionLayer/data.json');
+      const combinedData = { ...existingData, ...subfolders };
+      // Write JSON object to the file
+      fs.writeFileSync("../src/components/common/DataSelectionLayer/newdata.json", JSON.stringify(combinedData, null, 2));
+
+      console.log('Subfolders fetched from AWS and updated in JSON file successfully.');
+  } catch (error) {
+      console.error('Error initializing backend:', error);
+  }
+};
+
+
+initializeBackend();
