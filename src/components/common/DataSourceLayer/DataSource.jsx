@@ -99,8 +99,25 @@ const DataSource = ({ loggedUser }) => {
     };
     const steps = ['Catalog Selection', 'Data Source Selection', 'Data Selection', 'Finish'];
 
+    const fetchDataForAWS = async () => {
+        try {
+            // Perform an HTTP request to fetch data for AWS
+            const response = await await axios.post(`${process.env.REACT_APP_API_URL}/fetchawsdata`);
+            // Replace the URL with your actual API endpoint
+            if (!response.ok) {
+                throw new Error('Failed to fetch data for AWS');
+            }
+            const data = await response.json();
+            // Process the received data as needed
+            return data;
+        } catch (error) {
+            console.error('Error fetching data for AWS:', error);
+            throw error; // Rethrow the error to be caught by the caller
+        }
+    };
+    
 
-    const toggleRow = (key) => {
+    const toggleRow = async (key, row) => {
         const newDataSources = dataSources.map(dataSource => {
             if (dataSource.key === key) {
                 return { ...dataSource, loading: true };
@@ -108,17 +125,44 @@ const DataSource = ({ loggedUser }) => {
             return dataSource;
         });
         setDataSources(newDataSources);
-
-        setTimeout(() => {
-            const updatedDataSources = newDataSources.map(dataSource => {
-                if (dataSource.key === key) {
-                    return { ...dataSource, open: !dataSource.open, loading: false };
-                }
-                return dataSource;
-            });
-            setDataSources(updatedDataSources);
-        }, 1000);
+    
+        if (row.name === "AWS") {
+            try {
+                // Call your function to get data for AWS
+                const newData = await fetchDataForAWS(); // Replace fetchDataForAWS() with your actual function
+                // Manipulate newData as required
+                // For example, newDataSources.push(newData);
+    
+                // Update dataSources with new data
+                setDataSources(newDataSources);
+    
+                // Set loading to false after data is fetched
+                setTimeout(() => {
+                    const updatedDataSources = newDataSources.map(dataSource => {
+                        if (dataSource.key === key) {
+                            return { ...dataSource, open: !dataSource.open, loading: false };
+                        }
+                        return dataSource;
+                    });
+                    setDataSources(updatedDataSources);
+                }, 1000);
+            } catch (error) {
+                console.error('Error fetching data for AWS:', error);
+            }
+        } else {
+            // Proceed with default behavior for non-AWS rows
+            setTimeout(() => {
+                const updatedDataSources = newDataSources.map(dataSource => {
+                    if (dataSource.key === key) {
+                        return { ...dataSource, open: !dataSource.open, loading: false };
+                    }
+                    return dataSource;
+                });
+                setDataSources(updatedDataSources);
+            }, 1000);
+        }
     };
+    
 
 
     return (
@@ -157,7 +201,7 @@ const DataSource = ({ loggedUser }) => {
                                             <img src={row.img} alt={row.name} style={{ width: 50, height: 50, marginRight: 10 }} /> {row.name}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Button variant="contained" className="next-button5" onClick={() => toggleRow(row.key)}>
+                                            <Button variant="contained" className="next-button5" onClick={() => toggleRow(row.key,row)}>
                                                 {row.loading ? <CircularProgress size={24} /> : row.open ? 'View' : 'Scan'}
                                                 {row.open && !row.loading ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                                             </Button>

@@ -187,7 +187,7 @@ app.post('/chatbot', async (req, res) => {
     }
 });
 
-app.get('/existing-catalogs', async (req, res) => {
+app.get('/api/existing-catalogs', async (req, res) => {
     try {
    
       const jsonData = await fetchJSONData('catalogs.json');
@@ -342,7 +342,7 @@ function loadDatabaseConfig() {
   
   const path = require('path');
   
-  app.post('/saveSelectedBuckets', (req, res) => {
+  app.post('api/saveSelectedBuckets', (req, res) => {
       // Get the selected buckets data and data source name from the request body
       const { selectedBuckets, dataSourceName } = req.body;
       
@@ -373,7 +373,7 @@ function loadDatabaseConfig() {
       });
   });
   
-  app.post('/chatbotdata', (req, res) => {
+  app.post('api/chatbotdata', (req, res) => {
     const jsonData = req.body; // Assuming data is sent in the request body
 
     console.log('Received data:', jsonData);
