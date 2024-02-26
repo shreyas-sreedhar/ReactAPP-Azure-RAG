@@ -3,17 +3,51 @@
       "key": "aws",
       "name": "AWS S3 Buckets",
       "img": "./images/aws.svg",
-      "details": [
-        { "id": 1, "detail": "Bucket 1", "info": "Info 1" },
-        { "id": 2, "detail": "Bucket 2", "info": "Info 2" }
-      ]
+      "isConnected": false,
+      "subBuckets": {
+        "sales": [],
+        "products": []
+      }
     },
     {
       "key": "azure",
       "name": "Azure Blob",
       "img": "./images/azure.svg",
-      "details": [
-        { "id": 1, "detail": "Storage Account 1", "info": "Info 1" }
-      ]
-    }
+      "isConnected": false,
+      "subBuckets": {
+        "documents": [],
+        "images": []
+      }
+    },
+    {
+        "key": "snowflake",
+        "name": "Snowflake DB",
+        "img": "./images/snowflake.svg",
+        "isConnected": false,
+        "subBuckets": {
+          "documents": [],
+          "images": []
+        }
+      },
+      {
+        "key": "oracle",
+        "name": "Oracle DB",
+        "img": "./images/oracle.svg",
+        "isConnected": false,
+        "subBuckets": {
+          "documents": [],
+          "images": []
+        }
+      },
+      {
+        "key": "webpages",
+        "name": "Web Pages",
+        "img": "./images/web.svg",
+        "isConnected": false,
+        "subBuckets": {
+          "documents": [],
+          "images": []
+        }
+      }
   ]
+  

@@ -340,4 +340,62 @@ function loadDatabaseConfig() {
     res.json(data.tables || []);
   });
   
+  const path = require('path');
   
+  app.post('/saveSelectedBuckets', (req, res) => {
+      // Get the selected buckets data and data source name from the request body
+      const { selectedBuckets, dataSourceName } = req.body;
+      
+  
+      // Define the directory path where you want to save the file
+      const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
+  
+      // Ensure the directory exists, if not, create it
+      if (!fs.existsSync(directoryPath)) {
+          fs.mkdirSync(directoryPath, { recursive: true });
+      }
+  
+      // Define the file path
+      const filePath = path.join(directoryPath, 'selectedBuckets.json');
+  
+      // Write the selected buckets data and data source name to the JSON file
+      const jsonData = JSON.stringify({ selectedBuckets, dataSourceName });
+      console.log(jsonData);
+  
+      fs.writeFile(filePath, jsonData, (err) => {
+          if (err) {
+              console.error('Error writing to file:', err);
+              res.status(500).json({ error: 'An error occurred while saving the selected buckets.' });
+          } else {
+              console.log('Selected buckets data saved successfully.');
+              res.status(200).json({ message: 'Selected buckets data saved successfully.' });
+          }
+      });
+  });
+  
+  app.post('/chatbotdata', (req, res) => {
+    const jsonData = req.body; // Assuming data is sent in the request body
+
+    console.log('Received data:', jsonData);
+
+    // Define the directory path where you want to save the file
+    const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
+
+    // Ensure the directory exists, if not, create it
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true });
+    }
+
+    const filePath = path.join(directoryPath, 'chatbotData.json');
+
+    // Write the received JSON data to a JSON file
+    fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+        if (err) {
+            console.error('Error writing data to file:', err);
+            res.status(500).json({ error: 'Failed to store data' });
+        } else {
+            console.log('Data stored successfully');
+            res.status(200).json({ message: 'Data stored successfully' });
+        }
+    });
+});

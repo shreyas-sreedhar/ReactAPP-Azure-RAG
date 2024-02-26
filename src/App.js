@@ -14,6 +14,7 @@ import VPSalesRoute from './components/Authentication/VPSalesRoute';
 import FieldRepRoute from './components/Authentication/FieldRepRoute';
 import DataSource from './components/common/DataSourceLayer/DataSource';
 import DataSelction from './components/common/DataSelectionLayer/DataSelection';
+import Chatnow from './components/common/Chatnow/Chatnow';
 
 function App() {
 
@@ -65,7 +66,7 @@ function App() {
             <Route exact path='/chatbot' element={<Chatbot loggedUser={loggedUser} />} />
             <Route exact path='/chatbot-2' element={<DataSource loggedUser={loggedUser} />} />
             <Route exact path='/chatbot-3' element={<DataSelction loggedUser={loggedUser} />} />
-            {/* <Route exact path='/chatbot-4' element={<DataSource loggedUser={loggedUser} />} /> */}
+            <Route exact path='/chatbot-4' element={<Chatnow loggedUser={loggedUser} />} />
             <Route path='*' element={<div className='dataPlaceholder'>VIEW COMING SOON!</div>} />
           </Route>
         </Routes>

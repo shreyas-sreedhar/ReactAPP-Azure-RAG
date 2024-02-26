@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Collapse, Box, IconButton, Typography, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Collapse, Box, Checkbox, Typography, Button } from '@mui/material';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import '../Chatbot/chatbot.css'; // Ensure this points to your CSS file correctly
 import CatalogCard from '../CatalogLayer/Catalog-card/CatalogCard';
@@ -14,20 +14,100 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
+import dsj from './dataSources.json'
+import sbj from './subBuckets.json';
+
+import axios from 'axios'; 
 
 const createData = (key, name, img, isConnected = false) => ({
     key, name, img, isConnected, open: false, loading: false,
 });
 
 const DataSource = ({ loggedUser }) => {
-    const [dataSources, setDataSources] = useState([
-        createData('aws', 'AWS S3 Buckets', awsimg),
-        createData('azure', 'Azure Blob', azureimg),
-        createData('snowflake', 'SnowFlake DB', snwflkimg),
-        createData('oracle', 'Oracle DB', oracleimg),
-        createData('webpages', 'Web Pages', webimg),
+    const [dataSources, setDataSources] = useState([]);
+    const location = useLocation();
+// @ts-ignore
+    useEffect(() => {
+        // Function to load data from main JSON on component mount
+        const loadDataSources = async () => {
+            try {
+                // Simulated data loading delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const dataSourcesJson = dsj; 
+                const subBucketsJson = sbj; 
+                setDataSources(dataSourcesJson.map(item => ({
+                    ...item,
+                    subBuckets: subBucketsJson[item.key] ? Object.entries(subBucketsJson[item.key]).map(([domain, buckets]) => ({
+                        domain,
+                        buckets: buckets.map(bucket => ({ name: bucket, isSelected: false }))
+                    })) : []
+                })));
+            } catch (error) {
+                console.error('Error loading data sources:', error);
+            }
+        };
 
-    ]);
+        loadDataSources();
+    }, []);
+
+    const handleBucketSelection = (dataSourceKey, domain, bucketName) => {
+        // Function to handle bucket selection
+        setDataSources(prevDataSources => {
+            const updatedDataSources = prevDataSources.map(dataSource => {
+                if (dataSource.key === dataSourceKey) {
+                    const updatedSubBuckets = dataSource.subBuckets.map(subBucket => {
+                        if (subBucket.domain === domain) {
+                            return {
+                                ...subBucket,
+                                buckets: subBucket.buckets.map(bucket => {
+                                    if (bucket.name === bucketName) {
+                                        return {
+                                            ...bucket,
+                                            isSelected: !bucket.isSelected
+                                        };
+                                    }
+                                    return bucket;
+                                })
+                            };
+                        }
+                        return subBucket;
+                    });
+                    return {
+                        ...dataSource,
+                        subBuckets: updatedSubBuckets
+                    };
+                }
+                return dataSource;
+            });
+            return updatedDataSources;
+        });
+    };
+
+    const handleNextButtonClick = async () => {
+        // Function to handle next button click
+        try {
+            const selectedBuckets = dataSources.flatMap(dataSource =>
+                dataSource.subBuckets.flatMap(subBucket =>
+                    subBucket.buckets.filter(bucket => bucket.isSelected).map(bucket => ({
+                        dataSourceKey: dataSource.key,
+                        domain: subBucket.domain,
+                        bucketName: bucket.name
+                    }))
+                )
+            );
+            
+            
+            // Send selected buckets data to backend
+            await axios.post('http://localhost:3001/saveSelectedBuckets', { selectedBuckets });
+
+            // Navigate to next page
+            window.location.href = '/chatbot-3';
+        } catch (error) {
+            console.error('Error processing next button click:', error);
+        }
+    };
+
     const steps = [
         'Catalog Selection', 'Data Source Selection', 'Data Selection'
     ];
@@ -51,6 +131,7 @@ const DataSource = ({ loggedUser }) => {
             setDataSources(updatedDataSources);
         }, 1000); // 1 second delay
     };
+
     const handleConnectionToggle = (key) => {
         const newDataSources = dataSources.map(dataSource => {
             if (dataSource.key === key) {
@@ -60,11 +141,9 @@ const DataSource = ({ loggedUser }) => {
         });
         setDataSources(newDataSources);
     };
-    
 
     return (
         <>
-
             <div className='main-header'>
                 <Box sx={{ width: '100%' }}>
                     <Stepper activeStep={1} alternativeLabel>
@@ -94,6 +173,7 @@ const DataSource = ({ loggedUser }) => {
                         <TableBody>
                             {dataSources.map((row) => (
                                 <React.Fragment key={row.key}>
+                                    {/* Main row for the data source */}
                                     <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                                         <TableCell component="th" scope="row">
                                             <img src={row.img} alt={row.name} style={{ width: 50, height: 50, marginRight: 10 }} /> {row.name}
@@ -105,20 +185,28 @@ const DataSource = ({ loggedUser }) => {
                                             </Button>
                                         </TableCell>
                                     </TableRow>
+                                    {/* Nested rows for sub-buckets */}
                                     <TableRow>
                                         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                                             <Collapse in={row.open} timeout="auto" unmountOnExit>
                                                 <Box sx={{ margin: 1 }}>
-                                                    <Typography variant="h6" gutterBottom component="div">
-                                                        Details
-                                                        <CatalogCard
-                                                            name={row.name}
-                                                            // description="Add"
-                                                            isConnected={row.isConnected}
-                                                            onConnect={() => handleConnectionToggle(row.key)}
-                                                        />
-                                                    </Typography>
-                                                    Placeholder for {row.name} details or actions.
+                                                    {row.subBuckets.map((domain) => (
+                                                        <div key={domain.domain}>
+                                                            <Typography variant="h6" gutterBottom component="div">
+                                                                Domain: {domain.domain}
+                                                            </Typography>
+                                                            {domain.buckets.map(bucket => (
+                                                                <div key={bucket.name}>
+                                                                    <Checkbox
+                                                                        checked={bucket.isSelected}
+                                                                        onChange={() => handleBucketSelection(row.key, domain.domain, bucket.name)}
+                                                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                                    />
+                                                                    <span>{bucket.name}</span>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    ))}
                                                 </Box>
                                             </Collapse>
                                         </TableCell>
@@ -128,10 +216,9 @@ const DataSource = ({ loggedUser }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+
                 <div className="layout-footer">
-                    <Link to="/chatbot-3">
-                        <button className="next-button">Next</button>
-                    </Link>
+                    <button className="next-button" onClick={handleNextButtonClick}>Next</button>
                 </div>
             </div>
         </>
