@@ -1,1 +1,1 @@
-{"selectedBuckets":[{"dataSourceKey":"aws","domain":"Product_1_sales_1","bucketName":"sales_bucket_1"},{"dataSourceKey":"aws","domain":"Sales_2","bucketName":"product_bucket_2"},{"dataSourceKey":"webpages","domain":"documents","bucketName":"doc_bucket_1"}]}
+{"selectedBuckets":[{"dataSourceKey":"aws","domain":"Syndicated","bucketName":"IQVIA"}]}

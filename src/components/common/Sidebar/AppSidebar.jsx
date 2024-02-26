@@ -52,7 +52,7 @@ const Sidebar = (props) => {
     return (
         <div className={"sidebar"+(expand?' sidebar-expand':'')}>
             <div className='logo'>
-                <img className='white-to-black' src="/images/logo/logo.svg" alt="" />
+                <img className='white-to-black' src="/images/logo/indegene.png" alt="" />
             </div>
             <div className='expandCollapseIcon'>
                 <div onClick={()=>setExpand(!expand)}>

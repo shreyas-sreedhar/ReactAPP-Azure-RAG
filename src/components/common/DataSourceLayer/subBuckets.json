@@ -1,21 +1,20 @@
 {
     "aws": {
-      "Product_1_sales_1": ["sales_bucket_1", "sales_bucket_2", "sales_bucket_3"],
-      "Sales_2": ["product_bucket_1", "product_bucket_2", "product_bucket_3"]
+      "Syndicated": ["IQVIA", "Symphony", "Axciom"],
+      "Internal": ["SpecialtyPharma", "Alignment", "InclusionsExclusions", "CallGoal"]
     },
     "azure": {
       "documents": ["doc_bucket_1", "doc_bucket_2"],
       "images": ["image_bucket_1", "image_bucket_2"]
     },"snowflake": {
-        "documents": ["doc_bucket_1", "doc_bucket_2"],
-        "images": ["image_bucket_1", "image_bucket_2"]
+        "Databases": ["customer_master_db", "copay_patienthub","OpenClaims", "SalesTransaction"]
       },
       "oracle": {
-        "documents": ["doc_bucket_1", "doc_bucket_2"],
-        "images": ["image_bucket_1", "image_bucket_2"]
+        "Databases": ["SampleShipment", "PatientExclusions"]
+
       },"webpages": {
-        "documents": ["doc_bucket_1", "doc_bucket_2"],
-        "images": ["image_bucket_1", "image_bucket_2"]
+        "Knowledge Management": ["yourcompany.sharepoint.com"],
+        "Confluence": ["yourcompany.confluece.com", "yourcompany2.confluece.com"]
       }
 
   }

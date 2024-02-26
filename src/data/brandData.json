@@ -5,7 +5,7 @@
             "brands":[
                 {           
                     "name":"Entresto",
-                    "logo":"/images/logo/entresto.png",
+                    "logo":"/images/logo/dummy.jpg",
                     "brandPerformanceLink":{
                         "dark":"https://app.powerbi.com/reportEmbed?reportId=1f5fb494-c844-4ac2-b2df-084d8dc2515a&autoAuth=true&ctid=6d787ab7-f295-424f-b8cc-e3116a0f8520",
                         "light":"https://app.powerbi.com/reportEmbed?reportId=a6db403e-d2ff-453e-9b88-bf52fa8d5a31&autoAuth=true&ctid=6d787ab7-f295-424f-b8cc-e3116a0f8520"
@@ -29,7 +29,7 @@
                 },
                 {
                     "name":"Leqvio",
-                    "logo":"/images/logo/leqvio.png",
+                    "logo":"/images/logo/dummy.jpg",
                     "brandPerformanceLink":{
                         "dark":"",
                         "light":""
