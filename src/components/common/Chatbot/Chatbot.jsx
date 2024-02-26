@@ -236,9 +236,8 @@ function Chatbot({ loggedUser }) {
         { name: "Marketing", status: "" },
     ]);
 
-    const steps = [
-        'Catalog Selection', 'Data Source Selection', 'Data Selection'
-    ];
+    const steps = ['Catalog Selection', 'Data Source Selection', 'Data Selection', 'Finish'];
+
 
     const handleSelectCatalog = async (index) => {
         // Set the selected catalog to "connecting"

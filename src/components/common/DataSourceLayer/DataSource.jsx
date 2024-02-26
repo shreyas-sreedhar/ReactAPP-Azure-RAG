@@ -107,10 +107,8 @@ const DataSource = ({ loggedUser }) => {
             console.error('Error processing next button click:', error);
         }
     };
+    const steps = ['Catalog Selection', 'Data Source Selection', 'Data Selection', 'Finish'];
 
-    const steps = [
-        'Catalog Selection', 'Data Source Selection', 'Data Selection'
-    ];
 
     const toggleRow = (key) => {
         const newDataSources = dataSources.map(dataSource => {
