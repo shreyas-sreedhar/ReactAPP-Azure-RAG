@@ -10,7 +10,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import dsj from './dataSources.json'
 import sbj from './subBuckets.json';
 
+
 import axios from 'axios';
+
 
 const DataSource = ({ loggedUser }) => {
     const [dataSources, setDataSources] = useState([]);
@@ -87,9 +89,7 @@ const DataSource = ({ loggedUser }) => {
                 )
             );
 
-
-
-            await axios.post('http://localhost:3001/saveSelectedBuckets', { selectedBuckets });
+            await axios.post(`${process.env.REACT_APP_API_URL}/saveSelectedBuckets`, { selectedBuckets });
 
 
             window.location.href = '/chatbot-3';
