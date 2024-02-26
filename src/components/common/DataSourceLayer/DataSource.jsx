@@ -92,7 +92,7 @@ const DataSource = ({ loggedUser }) => {
             // localStorage.setItem('selectedBuckets', JSON.stringify(selectedBuckets));
 
             // Send selected buckets data to backend
-            await axios.post(`${process.env.REACT_APP_API_URL}/saveSelectedBuckets`, { selectedBuckets });
+            // await axios.post(`${process.env.REACT_APP_API_URL}/saveSelectedBuckets`, { selectedBuckets });
 
             // Navigate to next page
             window.location.href = '/chatbot-3';
