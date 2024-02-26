@@ -29,7 +29,7 @@ const Chatnow = ({ loggedUser }) => {
                     <h1 className='pagetitle'>Task Complete</h1>
                     <div className="div-3">
                         Click to go back home. 
-                       <Link to="/"> <button className='next-button'> Go Home </button> </Link>
+                       <Link to="/home"> <button className='next-button'> Go Home </button> </Link>
                     </div>
                 </header>
                     </div>

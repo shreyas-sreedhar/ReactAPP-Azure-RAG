@@ -157,212 +157,212 @@ const DataSelection = ({ loggedUser }) => {
 
     return (
         <>
-    <div className='main-header'>
-        <Box sx={{ width: '100%' }}>
-            <Stepper activeStep={3} alternativeLabel>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-        </Box>
-    </div>
-    <div className="layout-container">
-        <header className="layout-header">
-            <h1 className='pagetitle'>Choose Data</h1>
-            <div className="div-3">
-                Choose the data source and add the description from the available options below. Click on the Arrow to describe the respective data sources
-            </div>
-        </header>
-        <div>
-            {selectedBuckets.map((bucket, bucketIndex) => (
-                <Paper key={bucketIndex}>
-                    <Box p={3}>
-                        <div className='table-title-ds'>Data Source: {bucket.dataSourceKey}</div>
-                        <Typography variant="h6">Bucket Name: {bucket.bucketName}</Typography>
-                        <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
-                            <TextField label="Search" variant="outlined" size="small" />
-                            <FormControl size="small" style={{ minWidth: 120 }}>
-                                <InputLabel>Type of File</InputLabel>
-                                <Select label="Property" defaultValue="">
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="option1">PDF</MenuItem>
-                                    <MenuItem value="option2">Database</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <Box>
-                                <Button variant="contained" >Add</Button>
-                                <Button variant="contained" style={{ marginLeft: '8px' }}>Remove</Button>
-                            </Box>
-                        </Box>
-                        <TableContainer component={Paper}>
-                            <Table aria-label="collapsible table">
-                                <TableHead>
-                                <TableRow>
-        {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
-            <>
-                <TableCell align='center'>Select</TableCell>
-                <TableCell align='center'>Table Name</TableCell>
-                <TableCell align="center">Description</TableCell>
-                <TableCell align='center'>View Columns</TableCell>
-            </>
-        ) : (
-            <>
-                <TableCell align='center'>Select</TableCell>
-                <TableCell align='center'>File Name</TableCell>
-                <TableCell align="center">Description</TableCell>
-            </>
-        )}
-    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowIndex) => (
-                                        <React.Fragment key={bucketIndex + '-' + rowIndex}>
-                                            <TableRow>
-                                                <TableCell align='center'>
-                                                    <CheckboxRow
-                                                        id={bucketIndex + '-' + rowIndex}
-                                                        tableData={row}
-                                                        selectedRows={selectedRows}
-                                                        handleRowSelect={handleRowSelect}
-                                                    />
-                                                </TableCell>
-                                                <TableCell align='center'>{row.name}</TableCell>
-                                                <TableCell align="center">{trimDescription(row.description, 10)}
-                                                    <IconButton size="small" onClick={() => toggleCollapse(row)}>
-                                                        {row.open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                                                    </IconButton>
-                                                </TableCell>
-                                                {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
-                                              <>  <TableCell align='center'>
-                                                    <Button variant="contained" onClick={() => handleOpenModal(row)}>View</Button>
-                                                </TableCell>
-                                                </> ) : (<> </>)}
-                                            </TableRow>
-                                            {row.open && (
-    <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={row.open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
-                    {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
-                        <div>
-                            {row.description}
-                            <IconButton size="small" onClick={() => toggleCollapse(row)}>
-                                <KeyboardArrowUp />
-                            </IconButton>
-                        </div>
-                    ) : (
-                        <TextField
-                            variant="outlined"
-                            label="Description"
-                            placeholder="Enter description"
-                            fullWidth
-                            value="-"
-                            onChange={(e) => handleTableDescriptionChange(bucketIndex, rowIndex, e.target.value)}
-                        />
-                    )}
+            <div className='main-header'>
+                <Box sx={{ width: '100%' }}>
+                    <Stepper activeStep={3} alternativeLabel>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
                 </Box>
-            </Collapse>
-        </TableCell>
-    </TableRow>
-)}
-
-                                        </React.Fragment>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-
-                        <Dialog
-                            open={openModal}
-                            onClose={() => setOpenModal(false)}
-                            aria-labelledby="table-columns-dialog-title"
-                            fullWidth
-                            maxWidth="xl" // Set maximum width to extra large
-                        >
-                            <DialogTitle id="table-columns-dialog-title">{selectedTableData.name}</DialogTitle>
-                            <DialogContent dividers sx={{ width: '100vw' }}>
-                                <TableContainer>
-                                    <Table>
+            </div>
+            <div className="layout-container">
+                <header className="layout-header">
+                    <h1 className='pagetitle'>Choose Data</h1>
+                    <div className="div-3">
+                        Choose the data source and add the description from the available options below. Click on the Arrow to describe the respective data sources
+                    </div>
+                </header>
+                <div>
+                    {selectedBuckets.map((bucket, bucketIndex) => (
+                        <Paper key={bucketIndex}>
+                            <Box p={3}>
+                                <div className='table-title-ds'>Data Source: {bucket.dataSourceKey}</div>
+                                <Typography variant="h6">Bucket Name: {bucket.bucketName}</Typography>
+                                <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
+                                    <TextField label="Search" variant="outlined" size="small" />
+                                    <FormControl size="small" style={{ minWidth: 120 }}>
+                                        <InputLabel>Type of File</InputLabel>
+                                        <Select label="Property" defaultValue="">
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value="option1">PDF</MenuItem>
+                                            <MenuItem value="option2">Database</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <Box>
+                                        <Button variant="contained" >Add</Button>
+                                        <Button variant="contained" style={{ marginLeft: '8px' }}>Remove</Button>
+                                    </Box>
+                                </Box>
+                                <TableContainer component={Paper}>
+                                    <Table aria-label="collapsible table">
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Description</TableCell>
-                                                <TableCell>Foreign Key</TableCell>
-                                                <TableCell>Cardinality</TableCell>
+                                                {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
+                                                    <>
+                                                        <TableCell align='center'>Select</TableCell>
+                                                        <TableCell align='center'>Table Name</TableCell>
+                                                        <TableCell align="center">Description</TableCell>
+                                                        <TableCell align='center'>View Columns</TableCell>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <TableCell align='center'>Select</TableCell>
+                                                        <TableCell align='center'>File Name</TableCell>
+                                                        <TableCell align="center">Description</TableCell>
+                                                    </>
+                                                )}
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {selectedTableData.columns && selectedTableData.columns.map((column, index) => (
-                                                <TableRow key={index}>
-                                                    <TableCell>{column.name}</TableCell>
-                                                    <TableCell>
-                                                        <TextField
-                                                            defaultValue={column.description}
-                                                            onChange={(e) => handleDescriptionChange(index, e.target.value)}
-                                                            fullWidth
-                                                            style={{ width: '100%' }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        
-                                                            <TextField
-                                                                defaultValue={column.foreignKey ? `${column.foreignKey.table}+${column.foreignKey.column}` : ''}
-                                                                onChange={(e) => handleForeignKeyChange(index, e.target.value)}
-                                                                fullWidth
-                                                                style={{ width: '100%' }}
+                                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowIndex) => (
+                                                <React.Fragment key={bucketIndex + '-' + rowIndex}>
+                                                    <TableRow>
+                                                        <TableCell align='center'>
+                                                            <CheckboxRow
+                                                                id={bucketIndex + '-' + rowIndex}
+                                                                tableData={row}
+                                                                selectedRows={selectedRows}
+                                                                handleRowSelect={handleRowSelect}
                                                             />
-                                                          
-                                                        
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        
-                                                            <Select
-                                                                value={column.cardinality}
-                                                                onChange={(e) => handleCardinalityChange(index, e.target.value)}
-                                                            >
-                                                                <MenuItem value="One to One">One to One</MenuItem>
-                                                                <MenuItem value="One to Many">One to Many</MenuItem>
-                                                                <MenuItem value="Many to One">Many to One</MenuItem>
-                                                                <MenuItem value="Many to Many">Many to Many</MenuItem>
-                                                            </Select>
-                                                    </TableCell>
-                                                </TableRow>
+                                                        </TableCell>
+                                                        <TableCell align='center'>{row.name}</TableCell>
+                                                        <TableCell align="center">{trimDescription(row.description, 10)}
+                                                            <IconButton size="small" onClick={() => toggleCollapse(row)}>
+                                                                {row.open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                                            </IconButton>
+                                                        </TableCell>
+                                                        {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
+                                                            <>  <TableCell align='center'>
+                                                                <Button variant="contained" onClick={() => handleOpenModal(row)}>View</Button>
+                                                            </TableCell>
+                                                            </>) : (<> </>)}
+                                                    </TableRow>
+                                                    {row.open && (
+                                                        <TableRow>
+                                                            <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                                                <Collapse in={row.open} timeout="auto" unmountOnExit>
+                                                                    <Box sx={{ margin: 1 }}>
+                                                                        {bucket.dataSourceKey === 'oracle' || bucket.dataSourceKey === 'snowflake' ? (
+                                                                            <div>
+                                                                                {row.description}
+                                                                                <IconButton size="small" onClick={() => toggleCollapse(row)}>
+                                                                                    <KeyboardArrowUp />
+                                                                                </IconButton>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <TextField
+                                                                                variant="outlined"
+                                                                                label="Description"
+                                                                                placeholder="Enter description"
+                                                                                fullWidth
+                                                                                value="-"
+                                                                                onChange={(e) => handleTableDescriptionChange(bucketIndex, rowIndex, e.target.value)}
+                                                                            />
+                                                                        )}
+                                                                    </Box>
+                                                                </Collapse>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )}
+
+                                                </React.Fragment>
                                             ))}
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={() => handleSaveChanges()}>Save</Button>
-                                <Button onClick={() => setOpenModal(false)}>Close</Button>
-                            </DialogActions>
-                        </Dialog>
+
+                                <Dialog
+                                    open={openModal}
+                                    onClose={() => setOpenModal(false)}
+                                    aria-labelledby="table-columns-dialog-title"
+                                    fullWidth
+                                    maxWidth="xl" // Set maximum width to extra large
+                                >
+                                    <DialogTitle id="table-columns-dialog-title">{selectedTableData.name}</DialogTitle>
+                                    <DialogContent dividers sx={{ width: '100vw' }}>
+                                        <TableContainer>
+                                            <Table>
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell>Name</TableCell>
+                                                        <TableCell>Description</TableCell>
+                                                        <TableCell>Foreign Key</TableCell>
+                                                        <TableCell>Cardinality</TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+                                                    {selectedTableData.columns && selectedTableData.columns.map((column, index) => (
+                                                        <TableRow key={index}>
+                                                            <TableCell>{column.name}</TableCell>
+                                                            <TableCell>
+                                                                <TextField
+                                                                    defaultValue={column.description}
+                                                                    onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                                                                    fullWidth
+                                                                    style={{ width: '100%' }}
+                                                                />
+                                                            </TableCell>
+                                                            <TableCell>
+
+                                                                <TextField
+                                                                    defaultValue={column.foreignKey ? `${column.foreignKey.table}+${column.foreignKey.column}` : ''}
+                                                                    onChange={(e) => handleForeignKeyChange(index, e.target.value)}
+                                                                    fullWidth
+                                                                    style={{ width: '100%' }}
+                                                                />
 
 
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Box>
-                </Paper>
-            ))}
-        </div>
-        <div className="layout-footer">
-            <Link to="/chatbot-4" onClick={convertSelectedRowsToJson}>
-                <div className='next-button'> Next </div>
-            </Link>
-        </div>
-    </div>
-</>
+                                                            </TableCell>
+                                                            <TableCell>
+
+                                                                <Select
+                                                                    value={column.cardinality}
+                                                                    onChange={(e) => handleCardinalityChange(index, e.target.value)}
+                                                                >
+                                                                    <MenuItem value="One to One">One to One</MenuItem>
+                                                                    <MenuItem value="One to Many">One to Many</MenuItem>
+                                                                    <MenuItem value="Many to One">Many to One</MenuItem>
+                                                                    <MenuItem value="Many to Many">Many to Many</MenuItem>
+                                                                </Select>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={() => handleSaveChanges()}>Save</Button>
+                                        <Button onClick={() => setOpenModal(false)}>Close</Button>
+                                    </DialogActions>
+                                </Dialog>
+
+
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    component="div"
+                                    count={rows.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
+                            </Box>
+                        </Paper>
+                    ))}
+                </div>
+                <div className="layout-footer">
+                    <Link to="/chatbot-4" onClick={convertSelectedRowsToJson}>
+                        <div className='next-button'> Next </div>
+                    </Link>
+                </div>
+            </div>
+        </>
 
     );
 };
