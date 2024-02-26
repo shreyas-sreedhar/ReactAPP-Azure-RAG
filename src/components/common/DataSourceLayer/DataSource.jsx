@@ -17,17 +17,16 @@ import axios from 'axios';
 const DataSource = ({ loggedUser }) => {
     const [dataSources, setDataSources] = useState([]);
     const location = useLocation();
-    // @ts-ignore
+// @ts-ignore
     useEffect(() => {
-
+        // Function to load data from main JSON on component mount
         const loadDataSources = async () => {
             try {
-
+                // Simulated data loading delay
                 await new Promise(resolve => setTimeout(resolve, 1000));
-
-                const dataSourcesJson = dsj;
-                const subBucketsJson = sbj;
-
+                
+                const dataSourcesJson = dsj; 
+                const subBucketsJson = sbj; 
                 setDataSources(dataSourcesJson.map(item => ({
                     ...item,
                     subBuckets: subBucketsJson[item.key] ? Object.entries(subBucketsJson[item.key]).map(([domain, buckets]) => ({
@@ -42,6 +41,7 @@ const DataSource = ({ loggedUser }) => {
 
         loadDataSources();
     }, []);
+
 
     const handleBucketSelection = (dataSourceKey, domain, bucketName) => {
 
@@ -77,7 +77,7 @@ const DataSource = ({ loggedUser }) => {
     };
 
     const handleNextButtonClick = async () => {
-
+        // Function to handle next button click
         try {
             const selectedBuckets = dataSources.flatMap(dataSource =>
                 dataSource.subBuckets.flatMap(subBucket =>
@@ -88,10 +88,12 @@ const DataSource = ({ loggedUser }) => {
                     }))
                 )
             );
-
+            
+            
+            // Send selected buckets data to backend
             await axios.post(`${process.env.REACT_APP_API_URL}/saveSelectedBuckets`, { selectedBuckets });
 
-
+            // Navigate to next page
             window.location.href = '/chatbot-3';
         } catch (error) {
             console.error('Error processing next button click:', error);
@@ -102,8 +104,8 @@ const DataSource = ({ loggedUser }) => {
     const fetchDataForAWS = async () => {
         try {
             // Perform an HTTP request to fetch data for AWS
-            const response = await await axios.post(`${process.env.REACT_APP_API_URL}/fetchawsdata`);
-            // Replace the URL with your actual API endpoint
+            const response = await await axios.post(`${process.env.REACT_APP_API_URL}/api/fetchawsdata`);
+           
             if (!response.ok) {
                 throw new Error('Failed to fetch data for AWS');
             }
@@ -126,7 +128,7 @@ const DataSource = ({ loggedUser }) => {
         });
         setDataSources(newDataSources);
     
-        if (row.name === "AWS") {
+        if (row.name === "aws") {
             try {
                 // Call your function to get data for AWS
                 const newData = await fetchDataForAWS(); // Replace fetchDataForAWS() with your actual function
@@ -134,7 +136,7 @@ const DataSource = ({ loggedUser }) => {
                 // For example, newDataSources.push(newData);
     
                 // Update dataSources with new data
-                setDataSources(newDataSources);
+                setDataSources(newData);
     
                 // Set loading to false after data is fetched
                 setTimeout(() => {

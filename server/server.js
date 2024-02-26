@@ -306,6 +306,7 @@ app.post('/selected-domains', async (req, res) => {
 });
 
 
+
 async function uploadDataToS3(data, bucketName, keyPrefix, theUser) {
     // const timestamp = Date.now();
     const key = `${keyPrefix}/${theUser}.json`;
@@ -342,38 +343,98 @@ function loadDatabaseConfig() {
   
   const path = require('path');
   
-  app.post('api/saveSelectedBuckets', (req, res) => {
-      // Get the selected buckets data and data source name from the request body
-      const { selectedBuckets, dataSourceName } = req.body;
+  // app.post('api/saveSelectedBuckets', (req, res) => {
+  //     // Get the selected buckets data and data source name from the request body
+  //     const { selectedBuckets, dataSourceName } = req.body;
       
   
-      // Define the directory path where you want to save the file
-      const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
+  //     // Define the directory path where you want to save the file
+  //     const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
   
-      // Ensure the directory exists, if not, create it
-      if (!fs.existsSync(directoryPath)) {
-          fs.mkdirSync(directoryPath, { recursive: true });
+  //     // Ensure the directory exists, if not, create it
+  //     if (!fs.existsSync(directoryPath)) {
+  //         fs.mkdirSync(directoryPath, { recursive: true });
+  //     }
+  
+  //     // Define the file path
+  //     const filePath = path.join(directoryPath, 'selectedBuckets.json');
+  
+  //     // Write the selected buckets data and data source name to the JSON file
+  //     const jsonData = JSON.stringify({ selectedBuckets, dataSourceName });
+  //     console.log(jsonData);
+  
+  //     fs.writeFile(filePath, jsonData, (err) => {
+  //         if (err) {
+  //             console.error('Error writing to file:', err);
+  //             res.status(500).json({ error: 'An error occurred while saving the selected buckets.' });
+  //         } else {
+  //             console.log('Selected buckets data saved successfully.');
+  //             res.status(200).json({ message: 'Selected buckets data saved successfully.' });
+  //         }
+  //     });
+  // });
+  app.post('api/saveSelectedBuckets', (req, res) => {
+    // Get the selected buckets data and data source name from the request body
+    const { selectedBuckets, dataSourceName } = req.body;
+    
+
+    // Define the directory path where you want to save the file
+    const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
+
+    // Ensure the directory exists, if not, create it
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true });
+    }
+
+    // Define the file path
+    const filePath = path.join(directoryPath, 'selectedBuckets.json');
+
+    // Write the selected buckets data and data source name to the JSON file
+    const jsonData = JSON.stringify({ selectedBuckets, dataSourceName });
+    console.log(jsonData);
+
+    fs.writeFile(filePath, jsonData, (err) => {
+        if (err) {
+            console.error('Error writing to file:', err);
+            res.status(500).json({ error: 'An error occurred while saving the selected buckets.' });
+        } else {
+            console.log('Selected buckets data saved successfully.');
+            res.status(200).json({ message: 'Selected buckets data saved successfully.' });
+        }
+    });
+});
+app.post('/saveSelectedBuckets', (req, res) => {
+  // Get the selected buckets data and data source name from the request body
+  const { selectedBuckets, dataSourceName } = req.body;
+  
+
+  // Define the directory path where you want to save the file
+  const directoryPath = "../src/components/common/DataSourceLayer/"; // Replace this with your custom directory path
+
+  // Ensure the directory exists, if not, create it
+  if (!fs.existsSync(directoryPath)) {
+      fs.mkdirSync(directoryPath, { recursive: true });
+  }
+
+  // Define the file path
+  const filePath = path.join(directoryPath, 'selectedBuckets.json');
+
+  // Write the selected buckets data and data source name to the JSON file
+  const jsonData = JSON.stringify({ selectedBuckets, dataSourceName });
+  console.log(jsonData);
+
+  fs.writeFile(filePath, jsonData, (err) => {
+      if (err) {
+          console.error('Error writing to file:', err);
+          res.status(500).json({ error: 'An error occurred while saving the selected buckets.' });
+      } else {
+          console.log('Selected buckets data saved successfully.');
+          res.status(200).json({ message: 'Selected buckets data saved successfully.' });
       }
-  
-      // Define the file path
-      const filePath = path.join(directoryPath, 'selectedBuckets.json');
-  
-      // Write the selected buckets data and data source name to the JSON file
-      const jsonData = JSON.stringify({ selectedBuckets, dataSourceName });
-      console.log(jsonData);
-  
-      fs.writeFile(filePath, jsonData, (err) => {
-          if (err) {
-              console.error('Error writing to file:', err);
-              res.status(500).json({ error: 'An error occurred while saving the selected buckets.' });
-          } else {
-              console.log('Selected buckets data saved successfully.');
-              res.status(200).json({ message: 'Selected buckets data saved successfully.' });
-          }
-      });
   });
-  
-  app.post('api/chatbotdata', (req, res) => {
+});
+
+  app.post('/api/chatbotdata', (req, res) => {
     const jsonData = req.body; // Assuming data is sent in the request body
 
     console.log('Received data:', jsonData);
@@ -398,4 +459,60 @@ function loadDatabaseConfig() {
             res.status(200).json({ message: 'Data stored successfully' });
         }
     });
+});
+
+
+const fetchS3Buckets = async () => {
+  try {
+      const bucketDescriptions = {};
+
+      const listSubfoldersRecursive = async (prefix) => {
+          const response = await s3Client.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME, Prefix: prefix }).promise();
+
+          
+          const subfolders = response.CommonPrefixes.map(commonPrefix => commonPrefix.Prefix);
+
+          
+          const category = prefix.replace(/\//g, ''); // Extract category from prefix
+          bucketDescriptions[category] = {};
+
+          for (const subfolder of subfolders) {
+              const subfolderName = subfolder.replace(prefix, '').replace('/', ''); // Extract subfolder name
+              const subfolderPrefix = subfolder;
+
+              // Recursively fetch subfolders of the current subfolder
+              const subSubfolders = await listSubfoldersRecursive(subfolderPrefix);
+
+              // Add subfolder and its subfolders to the category
+              bucketDescriptions[category][subfolderName] = subSubfolders;
+          }
+      };
+
+      // Start recursive listing for each top-level folder
+      const topLevelFoldersResponse = await s3Client.listObjectsV2({ Bucket: process.env.AWS_BUCKET_NAME, Delimiter: '/' }).promise();
+      const topLevelFolders = topLevelFoldersResponse.CommonPrefixes.map(commonPrefix => commonPrefix.Prefix);
+      
+      for (const folder of topLevelFolders) {
+          await listSubfoldersRecursive(folder);
+      }
+
+      return bucketDescriptions;
+  } catch (error) {
+      console.error('Error fetching S3 buckets:', error);
+      throw error;
+  }
+};
+ 
+app.get('/api/fetchawsdata', async (req, res) => {
+  try {
+      // Your fetchS3Buckets function goes here (assuming you have defined it)
+      const bucketDescriptions = await fetchS3Buckets();
+
+      // Send the bucketDescriptions as the response
+      res.json(bucketDescriptions);
+  } catch (error) {
+      console.error('Error:', error);
+      // Send an error response
+      res.status(500).json({ error: 'Failed to fetch AWS data' });
+  }
 });
