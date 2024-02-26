@@ -222,7 +222,7 @@ const DataSelection = ({ loggedUser }) => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowIndex) => (
+                                        {rows.slice(0, 1).map((row, rowIndex) => (
                                                 <React.Fragment key={bucketIndex + '-' + rowIndex}>
                                                     <TableRow>
                                                         <TableCell align='center'>
